@@ -7,7 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -stdlib=libc++")
 set(C-CORE "libs/c-core")
 
 set(SOURCE_FILES
-        samples/subscribe_publish_callback_sample.cpp
+        main.cpp
+        src/pub_sub_helper.cpp
         )
 
 set(PUBNUB_FILES
@@ -49,7 +50,7 @@ set(SUB_PUB_CALLBACK_SAMPLE_FILES
         libs/c-core/core/pubnub_timer_list.c
         libs/c-core/posix/pubnub_ntf_callback_posix.c
         libs/c-core/posix/pubnub_get_native_socket.c
-        )
+        src/pub_sub_helper.cpp headers/pub_sub_helper.h)
 set(SUB_PUB_CALLBACK_SAMPLE_FILES_WINDOWS
         libs/c-core/cpp/pubnub_futres_windows.cpp
         libs/c-core/core/pubnub_timer_list.c
@@ -62,6 +63,7 @@ include_directories(libs/c-core/posix)
 include_directories(libs/c-core/core)
 include_directories(libs/c-core/lib/base64)
 include_directories(libs/c-core/lib/sockets)
+include_directories(headers/)
 
 add_definitions(
         -D PUBNUB_THREADSAFE
