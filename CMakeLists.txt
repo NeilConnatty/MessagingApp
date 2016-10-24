@@ -9,6 +9,7 @@ set(C-CORE "libs/c-core")
 set(SOURCE_FILES
         samples/subscribe_publish_callback_sample.cpp
         )
+
 set(PUBNUB_FILES
         libs/c-core/core/pubnub_coreapi.c
         libs/c-core/core/pubnub_coreapi_ex.c
@@ -29,17 +30,31 @@ set(PUBNUB_FILES
         libs/c-core/core/pubnub_json_parse.c
         libs/c-core/core/pubnub_helper.c
         )
+
 set(POSIX_FILES
         libs/c-core/posix/pubnub_version_posix.c
         libs/c-core/posix/pubnub_generate_uuid_posix.c
         libs/c-core/posix/pbpal_posix_blocking_io.c
         libs/c-core/posix/monotonic_clock_get_time_posix.c
         )
+set(WINDOWS_FILES
+        libs/c-core/windows/pubnub_version_windows.c
+        libs/c-core/windows/pubnub_generate_uuid_windows.c
+        libs/c-core/windows/pbpal_windows_blocking_io.c
+        libs/c-core/core/c99/snprintf.c
+        )
+
 set(SUB_PUB_CALLBACK_SAMPLE_FILES
         libs/c-core/cpp/pubnub_futres_posix.cpp
         libs/c-core/core/pubnub_timer_list.c
         libs/c-core/posix/pubnub_ntf_callback_posix.c
         libs/c-core/posix/pubnub_get_native_socket.c
+        )
+set(SUB_PUB_CALLBACK_SAMPLE_FILES_WINDOWS
+        libs/c-core/cpp/pubnub_futres_windows.cpp
+        libs/c-core/core/pubnub_timer_list.c
+        libs/c-core/windows/pubnub_ntf_callback_windows.c
+        libs/c-core/windows/pubnub_get_native_socket.c
         )
 
 include_directories(libs/c-core/cpp)
