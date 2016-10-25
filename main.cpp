@@ -12,19 +12,21 @@ using namespace messaging;
 static void on_publish (pubnub::context &pb, pubnub_res result)
 {
     if (PNR_OK == result) {
-        std::cout << pb.last_publish_result() << std::endl;
+        cout << pb.last_publish_result() << endl;
     } else {
-        std::cout << "Publish request failed" << std::endl;
+        cout << "Publish request failed" << endl;
     }
 }
 
 static void on_subscribe (pubnub::context &pb, pubnub_res result)
 {
     if (PNR_OK == result) {
-        std::vector<std::string> msg = pb.get_all();
+        cout << "successfully subscribed to channel" << endl;
 
-        for (std::vector<std::string>::iterator it = msg.begin(); it != msg.end(); ++it) {
-            std::cout << *it << std::endl;
+        vector<string> msg = pb.get_all();
+
+        for (vector<string>::iterator it = msg.begin(); it != msg.end(); ++it) {
+            cout << *it << endl;
         }
     } else {
         std::cout << "Subscribe Request failed" << std::endl;
@@ -35,12 +37,24 @@ void input_loop (pub_sub_helper &helper, pubnub::context &context)
 {
     string input;
     for (;;) {
+        input = context.get();
+        if (input.compare("")) {
+            cout << "New message: " << input << endl;
+        }
         cout << "What would you like to do?" << endl;
         getline(cin, input);
         if (!input.compare("subscribe")) {
-            cout << "Valid input" << endl;
+            cout << "Please input name of channel you wish to subscribe to:" << endl;
+            getline(cin, input);
+            helper.subscribe(context, input, on_subscribe);
         } else if (!input.compare("publish")) {
-            cout << "Valid input" << endl;
+            string message;
+            cout << "Please input the message you would like to send:" << endl;
+            getline(cin, message);
+            message = "\"" + message + "\"";
+            cout << "Please input the channel you would like to send your message to:" << endl;
+            getline(cin, input);
+            helper.publish(context, message, input, on_publish);
         } else if (!input.compare("quit")) {
             return;
         } else {
