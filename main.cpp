@@ -58,16 +58,6 @@ void input_loop (pub_sub_helper &helper, pubnub::context &context)
             cout << "Please input name of channel you wish to subscribe to:" << endl;
             getline(cin, input);
             helper.subscribe(context, input, on_subscribe);
-            /*
-            pubnub_res res = context.subscribe(input).await();
-            if (PNR_OK == res) {
-                cout << "First subscribe completed, waiting to finish second..." << endl;
-                /// literally have to subscribe twice... god knows why they designed it this way
-                helper.subscribe(context, input, on_subscribe);
-            } else {
-                cout << "Subscribe failed with code: " << (int)res << ". Please try again" << endl;
-            }
-             */
         } else if (!input.compare("publish")) {
             string message;
             cout << "Please input the message you would like to send:" << endl;
