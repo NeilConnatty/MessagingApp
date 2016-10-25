@@ -12,14 +12,19 @@
     operations that are started concurrently.
  */
 
+#define PUBLISH_KEY     "pub-c-35051607-8d2c-4d4f-bb63-f25f897ba2fe"
+#define SUBSCRIBE_KEY   "sub-c-8ef3c67a-9a3c-11e6-94c7-02ee2ddab7fe"
+
 
 int main()
 {
     try {
         enum pubnub_res res;
         char const *chan = "hello_world";
-        pubnub::context pb("demo", "demo");
-        pubnub::context pb_2("demo", "demo");
+//        pubnub::context pb("demo", "demo");
+//        pubnub::context pb_2("demo", "demo");
+        pubnub::context pb(PUBLISH_KEY, SUBSCRIBE_KEY);
+        pubnub::context pb_2(PUBLISH_KEY, SUBSCRIBE_KEY);
 
         std::cout << "--------------------------" << std::endl <<
             "Subscribing..." << std::endl <<
@@ -84,6 +89,17 @@ int main()
         }
         else {
             std::cout << "Subscribing failed with code: " << (int)res << std::endl;
+        }
+
+        std::cout << "Getting history" << std::endl;
+        res = pb.history(chan).await();
+        if (PNR_OK == res) {
+            std::cout << "Got history: ";
+            std::string msg;
+            do {
+                msg = pb.get();
+                std::cout << msg << std::endl;
+            } while (!msg.empty());
         }
     }
     catch (std::exception &exc) {

@@ -18,3 +18,9 @@ void pub_sub_helper::publish (context &pn, string msg, string channel,
 {
     pn.publish(channel, msg).then(func);
 }
+
+void pub_sub_helper::history(pubnub::context &pn, std::string channel,
+                             std::function<void(pubnub::context &, pubnub_res)> func)
+{
+    pn.history(channel, 100).then((func));
+}

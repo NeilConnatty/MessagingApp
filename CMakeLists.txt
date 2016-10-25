@@ -7,6 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -stdlib=libc++")
 set(C-CORE "libs/c-core")
 
 set(SOURCE_FILES
+#        samples/subscribe_publish_callback_sample.cpp
+#        samples/pubnub_sample.cpp
         main.cpp
         src/pub_sub_helper.cpp
         )

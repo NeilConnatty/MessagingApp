@@ -14,7 +14,7 @@ namespace messaging
     public:
         void subscribe (pubnub::context &pn, std::string channel, std::function<void(pubnub::context &, pubnub_res)> func);
         void publish (pubnub::context &pn, std::string msg, std::string channel, std::function<void(pubnub::context &, pubnub_res)> func);
-
+        void history (pubnub::context &pn, std::string channel, std::function<void(pubnub::context &, pubnub_res)> func);
     };
 }
 
