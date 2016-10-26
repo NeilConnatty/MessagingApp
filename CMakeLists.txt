@@ -73,6 +73,4 @@ add_definitions(
 )
 
 add_executable(Florie ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${SUB_PUB_CALLBACK_SAMPLE_FILES})
-add_library(Florielib SHARED ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${SUB_PUB_CALLBACK_SAMPLE_FILES})
 link_libraries(Florie pthread rt)
-link_libraries(Florielib pthread rt)
