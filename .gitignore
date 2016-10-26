@@ -27,3 +27,7 @@
 *.exe
 *.out
 *.app
+
+# Builds folder
+/[Bb]uild/
+/[Bb]uilds/

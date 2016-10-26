@@ -25,7 +25,6 @@ set(PUBNUB_FILES
         libs/c-core/lib/base64/pbbase64.c
 
         libs/c-core/core/pubnub_alloc_std.c
-        libs/c-core/core/pubnub_alloc_std.c
         libs/c-core/core/pubnub_assert_std.c
         libs/c-core/core/pubnub_generate_uuid.c
         libs/c-core/core/pubnub_blocking_io.c
@@ -52,7 +51,8 @@ set(SUB_PUB_CALLBACK_SAMPLE_FILES
         libs/c-core/core/pubnub_timer_list.c
         libs/c-core/posix/pubnub_ntf_callback_posix.c
         libs/c-core/posix/pubnub_get_native_socket.c
-        src/pub_sub_helper.cpp headers/pub_sub_helper.h)
+        src/pub_sub_helper.cpp headers/pub_sub_helper.h
+        )
 set(SUB_PUB_CALLBACK_SAMPLE_FILES_WINDOWS
         libs/c-core/cpp/pubnub_futres_windows.cpp
         libs/c-core/core/pubnub_timer_list.c
@@ -73,4 +73,6 @@ add_definitions(
 )
 
 add_executable(Florie ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${SUB_PUB_CALLBACK_SAMPLE_FILES})
+add_library(Florielib SHARED ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${SUB_PUB_CALLBACK_SAMPLE_FILES})
 link_libraries(Florie pthread rt)
+link_libraries(Florielib pthread rt)
