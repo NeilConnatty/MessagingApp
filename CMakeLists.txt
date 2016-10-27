@@ -46,18 +46,22 @@ set(WINDOWS_FILES
         libs/c-core/core/c99/snprintf.c
         )
 
-set(SUB_PUB_CALLBACK_SAMPLE_FILES
+set(CALLBACK_POSIX
         libs/c-core/cpp/pubnub_futres_posix.cpp
         libs/c-core/core/pubnub_timer_list.c
         libs/c-core/posix/pubnub_ntf_callback_posix.c
         libs/c-core/posix/pubnub_get_native_socket.c
-        src/pub_sub_helper.cpp headers/pub_sub_helper.h
         )
-set(SUB_PUB_CALLBACK_SAMPLE_FILES_WINDOWS
+set(CALLBACK_WINDOWS
         libs/c-core/cpp/pubnub_futres_windows.cpp
         libs/c-core/core/pubnub_timer_list.c
         libs/c-core/windows/pubnub_ntf_callback_windows.c
         libs/c-core/windows/pubnub_get_native_socket.c
+        )
+
+set (SYNC_POSIX_WINDOWS
+        libs/c-core/cpp/pubnub_futres_sync.cpp
+        libs/c-core/core/pubnub_ntf_sync.c
         )
 
 include_directories(libs/c-core/cpp)
@@ -72,5 +76,5 @@ add_definitions(
         -D PUBNUB_CALLBACK_API
 )
 
-add_executable(Florie ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${SUB_PUB_CALLBACK_SAMPLE_FILES})
+add_executable(Florie ${SOURCE_FILES} ${PUBNUB_FILES} ${POSIX_FILES} ${CALLBACK_POSIX})
 link_libraries(Florie pthread rt)

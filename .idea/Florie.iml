@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/pub_sub_helper.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/pub_sub_helper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.c" isTestSource="false" />
