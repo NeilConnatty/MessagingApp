@@ -4,7 +4,7 @@
 
 #include "messenger.h"
 #include "pubnub.hpp"
-#include "message_formatting_helper.h"
+#include "formatting_helper.h"
 #include <exception>
 #include <string>
 #include <thread>

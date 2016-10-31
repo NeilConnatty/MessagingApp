@@ -11,10 +11,11 @@ set(SOURCE_FILES
 #        samples/pubnub_sample.cpp
         main.cpp
         src/pub_sub_helper.cpp
+        src/formatting_helper.cpp
         )
 set(TEST_SOURCE_FILES
         src/test_main.cpp
-        src/message_formatting_helper.cpp
+        src/formatting_helper.cpp
         src/messenger.cpp)
 
 
