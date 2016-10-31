@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(Florie)
+project(Nitty)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -stdlib=libc++")
@@ -9,10 +9,14 @@ set(C-CORE "libs/c-core")
 set(SOURCE_FILES
 #        samples/subscribe_publish_callback_sample.cpp
 #        samples/pubnub_sample.cpp
-#        main.cpp
-#        src/pub_sub_helper.cpp
+        main.cpp
+        src/pub_sub_helper.cpp
+        )
+set(TEST_SOURCE_FILES
         src/test_main.cpp
-        src/messenger.cpp src/message_formatting_helper.cpp src/message_formatting_helper.h)
+        src/message_formatting_helper.cpp
+        src/messenger.cpp)
+
 
 set(PUBNUB_FILES
         libs/c-core/core/pubnub_coreapi.c
@@ -82,5 +86,7 @@ add_library(pubnub_sync_posix SHARED ${PUBNUB_FILES} ${POSIX_FILES} ${SYNC_POSIX
 #add_library(pubnub_callback_windows SHARED ${PUBNUB_FILES} ${WINDOWS_FILES} ${CALLBACK_WINDOWS})
 #add_library(pubnub_sync_windows SHARED ${PUBNUB_FILES} ${WINDOWS_FILES} ${SYNC_POSIX_WINDOWS})
 
-add_executable(Florie ${SOURCE_FILES})
-target_link_libraries(Florie pubnub_callback_posix)
+add_executable(Nitty ${SOURCE_FILES})
+add_executable(Test ${TEST_SOURCE_FILES})
+target_link_libraries(Nitty pubnub_callback_posix)
+target_link_libraries(Test pubnub_callback_posix)

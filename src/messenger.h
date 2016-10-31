@@ -14,7 +14,7 @@ namespace messaging {
         pubnub::context *start_messenger();
 
         /** returns empty string if no message */
-        std::string get_latest_message(pubnub::context *pb);
+        void get_latest_message (pubnub::context *pb, std::function<void(pubnub::context &, pubnub_res)> callback);
     };
 }
 

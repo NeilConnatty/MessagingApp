@@ -5,9 +5,25 @@
 #include <string>
 #include "pubnub.hpp"
 #include "messenger.h"
+#include <thread>
 
 pubnub::context* context = 0;
 messaging::messenger* messenger = 0;
+
+void displayMessage (std::string msg)
+{
+    std::cout << msg << std::endl;
+}
+
+void on_subscribe (pubnub::context &pb, pubnub_res res)
+{
+    if (PNR_OK == res) {
+        displayMessage(pb.get());
+        messenger->get_latest_message(&pb, on_subscribe);
+    } else {
+        std::cout << "Subscribe Request failed" << std::endl;
+    }
+}
 
 /** return false on unsuccessful initialize */
 int initialize_messenger ()
@@ -24,16 +40,8 @@ int initialize_messenger ()
         delete messenger;
         return  0;
     }
-
+    messenger->get_latest_message(context, on_subscribe);
     return 1;
-}
-
-/** return empty string on no new messages or on error */
-std::string retrieve_new_message ()
-{
-    std::cout << "retrieveNewMessage() called" << std::endl;
-    std::string str = messenger->get_latest_message(context);
-    return str;
 }
 
 
@@ -47,9 +55,7 @@ void stop_messenger ()
 int main ()
 {
     if (initialize_messenger()) {
-        std::cout << retrieve_new_message() << std::endl;
-        stop_messenger();
-        return 1;
+        for (;;) {}
     } else {
         return 0;
     }
