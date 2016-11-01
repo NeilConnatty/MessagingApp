@@ -5,6 +5,7 @@
 #include "formatting_helper.h"
 using namespace messaging;
 
-std::string formatting_helper::format_message (std::string msg) {
+std::string formatting_helper::format_message (std::string msg)
+{
      return "\"" + msg + "\"";
 }

@@ -11,7 +11,8 @@
 /// BCCH app keys
 #define PUBLISH_KEY "pub-c-ffee06f7-78b5-483c-b800-fae8f3a67f0c"
 #define SUBSCRIBE_KEY "sub-c-3dc063c8-9bc0-11e6-814f-0619f8945a4f"
-#define CHANNEL "bcch"
+#define MSG_CHANNEL "bcch"
+#define INPUT_CHANNEL "input"
 
 using namespace std;
 using namespace messaging;
@@ -67,9 +68,21 @@ void input_loop (pub_sub_helper &helper, pubnub::context &context)
             cout << "Please input the message you would like to send:" << endl;
             getline(cin, message);
             message = formatter.format_message(message);
-            helper.publish(context, message, CHANNEL, on_publish);
+            helper.publish(context, message, MSG_CHANNEL, on_publish);
         } else if (!input.compare("get history")) {
-            helper.history(context, CHANNEL, on_history);
+            helper.history(context, MSG_CHANNEL, on_history);
+        } else if (!input.compare("zoom image")) {
+            input = formatter.format_message(input);
+            helper.publish(context, input, INPUT_CHANNEL, on_publish);
+        } else if (!input.compare("show image")) {
+            input = formatter.format_message(input);
+            helper.publish(context, input, INPUT_CHANNEL, on_publish);
+        } else if (!input.compare("hide image")) {
+            input = formatter.format_message(input);
+            helper.publish(context, input, INPUT_CHANNEL, on_publish);
+        } else if (!input.compare("reload image")) {
+            input = formatter.format_message(input);
+            helper.publish(context, input, INPUT_CHANNEL, on_publish);
         } else if (!input.compare("quit")) {
             return;
         } else {
