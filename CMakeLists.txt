@@ -7,8 +7,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -stdlib=libc++")
 set(C-CORE "libs/c-core")
 
 set(SOURCE_FILES
-#        samples/subscribe_publish_callback_sample.cpp
-#        samples/pubnub_sample.cpp
         main.cpp
         src/pub_sub_helper.cpp
         src/formatting_helper.cpp
@@ -16,7 +14,13 @@ set(SOURCE_FILES
 set(TEST_SOURCE_FILES
         src/test_main.cpp
         src/formatting_helper.cpp
-        src/messenger.cpp)
+        src/messenger.cpp
+        )
+set(BCCH_SOURCE_FILES
+        src/BCCH_main.cpp
+        src/formatting_helper.cpp
+        src/pub_sub_helper.cpp
+        )
 
 
 set(PUBNUB_FILES
@@ -89,5 +93,7 @@ add_library(pubnub_sync_posix SHARED ${PUBNUB_FILES} ${POSIX_FILES} ${SYNC_POSIX
 
 add_executable(Nitty ${SOURCE_FILES})
 add_executable(Test ${TEST_SOURCE_FILES})
+add_executable(BCCH ${BCCH_SOURCE_FILES})
 target_link_libraries(Nitty pubnub_callback_posix)
 target_link_libraries(Test pubnub_callback_posix)
+target_link_libraries(BCCH pubnub_callback_posix)

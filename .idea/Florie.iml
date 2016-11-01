@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test_main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/messenger.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/pub_sub_helper.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/BCCH_main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.c" isTestSource="false" />

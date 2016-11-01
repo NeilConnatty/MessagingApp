@@ -1,12 +1,17 @@
+//
+// Created by Neil Connatty on 2016-11-01.
+//
+
 #include <iostream>
 #include <formatting_helper.h>
 
 #include "pubnub.hpp"
 #include "pub_sub_helper.h"
 
-/// Nitty app keys
-#define PUBLISH_KEY     "pub-c-35051607-8d2c-4d4f-bb63-f25f897ba2fe"
-#define SUBSCRIBE_KEY   "sub-c-8ef3c67a-9a3c-11e6-94c7-02ee2ddab7fe"
+/// BCCH app keys
+#define PUBLISH_KEY "pub-c-ffee06f7-78b5-483c-b800-fae8f3a67f0c"
+#define SUBSCRIBE_KEY "sub-c-3dc063c8-9bc0-11e6-814f-0619f8945a4f"
+#define CHANNEL "bcch"
 
 using namespace std;
 using namespace messaging;
@@ -57,26 +62,18 @@ void input_loop (pub_sub_helper &helper, pubnub::context &context)
     for (;;) {
         cout << "What would you like to do?" << endl;
         getline(cin, input);
-        if (!input.compare("subscribe")) {
-            cout << "Please input name of channel you wish to subscribe to:" << endl;
-            getline(cin, input);
-            helper.subscribe(PUBLISH_KEY, SUBSCRIBE_KEY, input, on_subscribe);
-        } else if (!input.compare("publish")) {
+        if (!input.compare("publish")) {
             string message;
             cout << "Please input the message you would like to send:" << endl;
             getline(cin, message);
             message = formatter.format_message(message);
-            cout << "Please input the channel you would like to send your message to:" << endl;
-            getline(cin, input);
-            helper.publish(context, message, input, on_publish);
+            helper.publish(context, message, CHANNEL, on_publish);
         } else if (!input.compare("get history")) {
-            cout <<"Please input the channel you would like to get history from:" << endl;
-            getline(cin, input);
-            helper.history(context, input, on_history);
+            helper.history(context, CHANNEL, on_history);
         } else if (!input.compare("quit")) {
             return;
         } else {
-            cout << "That is not a valid input." << endl;
+            cout << "That is not a valid input. Input 'publish' if you would like to send a message, or 'get history' if you would like to get all past messages" << endl;
         }
     }
 }
