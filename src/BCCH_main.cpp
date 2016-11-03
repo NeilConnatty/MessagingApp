@@ -86,7 +86,7 @@ void input_loop (pub_sub_helper &helper, pubnub::context &context)
         } else if (!input.compare("quit")) {
             return;
         } else {
-            cout << "That is not a valid input. Input 'publish' if you would like to send a message, or 'get history' if you would like to get all past messages" << endl;
+            cout << "That is not a valid input." << endl;
         }
     }
 }
