@@ -31,6 +31,7 @@ private:
     sfg::Window::Ptr m_window;
 
     sfg::Label::Ptr m_label;
+    sfg::Entry::Ptr m_entry;
     sfg::Button::Ptr m_send_message_button;
     sfg::Button::Ptr m_show_image_button;
     sfg::Button::Ptr m_hide_image_button;
