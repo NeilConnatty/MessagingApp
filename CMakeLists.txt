@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.6)
 project(Nitty)
 
+## Find includes in corresponding build directories
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)
+## Instruct CMake to run moc automatically when needed.
+#set(CMAKE_AUTOMOC ON)
+
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -v -stdlib=libc++")
 
@@ -20,7 +27,8 @@ set(BCCH_SOURCE_FILES
         src/BCCH_main.cpp
         src/formatting_helper.cpp
         src/pub_sub_helper.cpp
-        )
+        src/BCCH_app.cpp
+        src/pubnub_interface.cpp)
 
 
 set(PUBNUB_FILES
@@ -74,6 +82,11 @@ set (SYNC_POSIX_WINDOWS
         libs/c-core/core/pubnub_ntf_sync.c
         )
 
+find_package(SFML COMPONENTS system window graphics REQUIRED)
+find_package(SFGUI REQUIRED)
+include_directories(${SFML_INCLUDE_DIR})
+include_directories(${SFGUI_INCLUDE_DIR})
+
 include_directories(libs/c-core/cpp)
 include_directories(libs/c-core/posix)
 include_directories(libs/c-core/core)
@@ -86,6 +99,9 @@ add_definitions(
         -D PUBNUB_CALLBACK_API
 )
 
+#set (CMAKE_PREFIX_PATH ../../Qt/5.7/clang_64/lib/cmake/)
+#find_package(Qt5Widgets)
+
 add_library(pubnub_callback_posix SHARED ${PUBNUB_FILES} ${POSIX_FILES} ${CALLBACK_POSIX})
 add_library(pubnub_sync_posix SHARED ${PUBNUB_FILES} ${POSIX_FILES} ${SYNC_POSIX_WINDOWS})
 #add_library(pubnub_callback_windows SHARED ${PUBNUB_FILES} ${WINDOWS_FILES} ${CALLBACK_WINDOWS})
@@ -96,4 +112,5 @@ add_executable(Test ${TEST_SOURCE_FILES})
 add_executable(BCCH ${BCCH_SOURCE_FILES})
 target_link_libraries(Nitty pubnub_callback_posix)
 target_link_libraries(Test pubnub_callback_posix)
-target_link_libraries(BCCH pubnub_callback_posix)
+target_link_libraries(BCCH pubnub_callback_posix ${SFGUI_LIBRARY} ${SFML_LIBRARIES})
+#target_link_libraries(BCCH Qt5::Widgets)
