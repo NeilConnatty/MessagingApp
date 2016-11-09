@@ -67,3 +67,8 @@ void pubnub_interface::scroll_right ()
 {
     publish_input("scroll right");
 }
+
+void pubnub_interface::flip_view ()
+{
+    publish_input("flip view");
+}

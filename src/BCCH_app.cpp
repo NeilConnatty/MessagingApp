@@ -40,6 +40,7 @@ void BCCH_app::init_widgets (pubnub_interface &pn_interface)
     buttons.push_back(init_button("Upload Image", std::bind(&pubnub_interface::upload_image, &pn_interface)));
     buttons.push_back(init_button("Scroll Left", std::bind(&pubnub_interface::scroll_left, &pn_interface)));
     buttons.push_back(init_button("Scroll Right", std::bind(&pubnub_interface::scroll_right, &pn_interface)));
+    buttons.push_back(init_button("Flip View", std::bind(&pubnub_interface::flip_view, &pn_interface)));
 
     m_box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
     m_box->Pack(box);
