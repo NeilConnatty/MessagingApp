@@ -94,6 +94,7 @@ void BCCH_app::Run ()
 {
     sf::RenderWindow render_window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BCCH SmartGlasses Controller App", sf::Style::Titlebar | sf::Style::Close);
     render_window.resetGLStates();
+    render_window.setFramerateLimit(60);
 
     init_widgets(m_pn_interface);
 
