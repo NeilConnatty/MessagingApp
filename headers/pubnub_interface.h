@@ -27,9 +27,12 @@ public:
     void zoom_image ();
     void reload_image ();
     void upload_image ();
+    void scroll_left ();
+    void scroll_right ();
 
 private:
     static void on_publish (pubnub::context &pn, pubnub_res res);
+    void publish_input (std::string input);
 
 private:
     pubnub::context m_pn;

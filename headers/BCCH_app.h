@@ -27,7 +27,7 @@ private:
 
 private:
     const unsigned int SCREEN_WIDTH = 1280;
-    const unsigned int SCREEN_HEIGHT = 900;
+    const unsigned int SCREEN_HEIGHT = 1280;
     const unsigned int FONT_SIZE = 40;
 
     sfg::SFGUI m_sfgui;

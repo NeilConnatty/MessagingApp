@@ -23,6 +23,10 @@ void pubnub_interface::on_publish (pubnub::context &pn, pubnub_res res)
     }
 }
 
+void pubnub_interface::publish_input (std::string input)
+{
+    m_helper.publish(m_pn, m_formatter.format_message(input), INPUT_CHANNEL, pubnub_interface::on_publish);
+}
 
 void pubnub_interface::send_message (std::string msg)
 {
@@ -31,25 +35,35 @@ void pubnub_interface::send_message (std::string msg)
 
 void pubnub_interface::show_image ()
 {
-    m_helper.publish(m_pn, m_formatter.format_message("show image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+    publish_input("show image");
 }
 
 void pubnub_interface::hide_image ()
 {
-    m_helper.publish(m_pn, m_formatter.format_message("hide image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+    publish_input("hide image");
 }
 
 void pubnub_interface::zoom_image()
 {
-    m_helper.publish(m_pn, m_formatter.format_message("zoom image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+    publish_input("zoom image");
 }
 
 void pubnub_interface::reload_image ()
 {
-    m_helper.publish(m_pn, m_formatter.format_message("reload image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+    publish_input("reload image");
 }
 
 void pubnub_interface::upload_image ()
 {
-    m_helper.publish(m_pn, m_formatter.format_message("upload image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+    publish_input("upload image");
+}
+
+void pubnub_interface::scroll_left ()
+{
+    publish_input("scroll left");
+}
+
+void pubnub_interface::scroll_right ()
+{
+    publish_input("scroll right");
 }
