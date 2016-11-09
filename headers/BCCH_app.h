@@ -21,7 +21,9 @@ public:
 
 private:
     void init_widgets (pubnub_interface &pn_interface);
+    sfg::Button::Ptr init_button (std::string name, std::function<void()> delegate);
     void handle_events (sf::RenderWindow &render_window, sf::Event &event);
+    void render_screen (sf::RenderWindow &render_window);
 
 private:
     const unsigned int SCREEN_WIDTH = 1280;
@@ -37,12 +39,7 @@ private:
 
     sfg::Label::Ptr m_label;
     sfg::Entry::Ptr m_entry;
-    sfg::Button::Ptr m_send_message_button;
-    sfg::Button::Ptr m_show_image_button;
-    sfg::Button::Ptr m_hide_image_button;
-    sfg::Button::Ptr m_zoom_image_button;
-    sfg::Button::Ptr m_reload_image_button;
-    sfg::Button::Ptr m_upload_image_button;
+    std::vector<sfg::Button::Ptr> buttons;
 };
 
 

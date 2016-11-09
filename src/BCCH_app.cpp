@@ -11,6 +11,14 @@ void BCCH_app::send_message ()
     m_entry->SetText("");
 }
 
+sfg::Button::Ptr BCCH_app::init_button (std::string name, std::function<void()> delegate)
+{
+    auto button = sfg::Button::Create(name);
+    button->GetSignal(sfg::Widget::OnLeftClick).Connect(delegate);
+    button->SetClass("textSet");
+    return button;
+}
+
 void BCCH_app::init_widgets (pubnub_interface &pn_interface)
 {
     m_label = sfg::Label::Create("Input Message: ");
@@ -24,38 +32,18 @@ void BCCH_app::init_widgets (pubnub_interface &pn_interface)
     box->Pack(m_label);
     box->Pack(m_entry);
 
-    m_send_message_button = sfg::Button::Create("Send Message");
-    m_send_message_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&BCCH_app::send_message, this));
-    m_send_message_button->SetClass("textSet");
-
-    m_show_image_button = sfg::Button::Create("Show Image");
-    m_show_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::show_image, &pn_interface));
-    m_show_image_button->SetClass("textSet");
-
-    m_hide_image_button = sfg::Button::Create("Hide Image");
-    m_hide_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::hide_image, &pn_interface));
-    m_hide_image_button->SetClass("textSet");
-
-    m_zoom_image_button = sfg::Button::Create("Zoom Image");
-    m_zoom_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::zoom_image, &pn_interface));
-    m_zoom_image_button->SetClass("textSet");
-
-    m_reload_image_button = sfg::Button::Create("Reload Image");
-    m_reload_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::reload_image, &pn_interface));
-    m_reload_image_button->SetClass("textSet");
-
-    m_upload_image_button = sfg::Button::Create("Upload Image");
-    m_upload_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::upload_image, &pn_interface));
-    m_upload_image_button->SetClass("textSet");
+    buttons.push_back(init_button("Send Message", std::bind(&BCCH_app::send_message, this)));
+    buttons.push_back(init_button("Show Image", std::bind(&pubnub_interface::show_image, &pn_interface)));
+    buttons.push_back(init_button("Hide Image", std::bind(&pubnub_interface::hide_image, &pn_interface)));
+    buttons.push_back(init_button("Zoom Image", std::bind(&pubnub_interface::zoom_image, &pn_interface)));
+    buttons.push_back(init_button("Reload Image", std::bind(&pubnub_interface::reload_image, &pn_interface)));
+    buttons.push_back(init_button("Upload Image", std::bind(&pubnub_interface::upload_image, &pn_interface)));
 
     m_box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
     m_box->Pack(box);
-    m_box->Pack(m_send_message_button);
-    m_box->Pack(m_show_image_button);
-    m_box->Pack(m_hide_image_button);
-    m_box->Pack(m_zoom_image_button);
-    m_box->Pack(m_reload_image_button);
-    m_box->Pack(m_upload_image_button);
+    for (int i=0; i<buttons.size(); i++) {
+        m_box->Pack(buttons[i]);
+    }
 
     m_window = sfg::Window::Create();
     m_window->SetStyle(~sfg::Window::Style::RESIZE & ~sfg::Window::Style::CLOSE & sfg::Window::Style::TOPLEVEL & ~sfg::Window::Style::TITLEBAR);
@@ -90,6 +78,13 @@ void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
     }
 }
 
+void BCCH_app::render_screen (sf::RenderWindow &render_window)
+{
+    render_window.clear();
+    m_sfgui.Display(render_window);
+    render_window.display();
+}
+
 void BCCH_app::Run ()
 {
     sf::RenderWindow render_window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BCCH SmartGlasses Controller App", sf::Style::Titlebar | sf::Style::Close);
@@ -103,11 +98,7 @@ void BCCH_app::Run ()
 
     while (render_window.isOpen()) {
         handle_events(render_window, event);
-
         m_desktop.Update(clock.restart().asSeconds());
-
-        render_window.clear();
-        m_sfgui.Display(render_window);
-        render_window.display();
+        render_screen(render_window);
     }
 }
