@@ -9,6 +9,10 @@
 #ifndef NITTY_BCCH_WINDOW_H
 #define NITTY_BCCH_WINDOW_H
 
+#define FOOTPEDAL_LEFT 12
+#define FOOTPEDAL_MIDDLE 74
+#define FOOTPEDAL_RIGHT 63
+
 class BCCH_app
 {
 public:
@@ -17,6 +21,7 @@ public:
 
 private:
     void init_widgets (pubnub_interface &pn_interface);
+    void handle_events (sf::RenderWindow &render_window, sf::Event &event);
 
 private:
     const unsigned int SCREEN_WIDTH = 1280;
@@ -37,6 +42,7 @@ private:
     sfg::Button::Ptr m_hide_image_button;
     sfg::Button::Ptr m_zoom_image_button;
     sfg::Button::Ptr m_reload_image_button;
+    sfg::Button::Ptr m_upload_image_button;
 };
 
 

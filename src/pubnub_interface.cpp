@@ -48,3 +48,8 @@ void pubnub_interface::reload_image ()
 {
     m_helper.publish(m_pn, m_formatter.format_message("reload image"), INPUT_CHANNEL, pubnub_interface::on_publish);
 }
+
+void pubnub_interface::upload_image ()
+{
+    m_helper.publish(m_pn, m_formatter.format_message("upload image"), INPUT_CHANNEL, pubnub_interface::on_publish);
+}

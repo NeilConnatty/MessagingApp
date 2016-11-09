@@ -26,6 +26,7 @@ public:
     void hide_image ();
     void zoom_image ();
     void reload_image ();
+    void upload_image ();
 
 private:
     static void on_publish (pubnub::context &pn, pubnub_res res);

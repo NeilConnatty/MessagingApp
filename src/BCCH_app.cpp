@@ -44,6 +44,10 @@ void BCCH_app::init_widgets (pubnub_interface &pn_interface)
     m_reload_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::reload_image, &pn_interface));
     m_reload_image_button->SetClass("textSet");
 
+    m_upload_image_button = sfg::Button::Create("Upload Image");
+    m_upload_image_button->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&pubnub_interface::upload_image, &pn_interface));
+    m_upload_image_button->SetClass("textSet");
+
     m_box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
     m_box->Pack(box);
     m_box->Pack(m_send_message_button);
@@ -51,6 +55,7 @@ void BCCH_app::init_widgets (pubnub_interface &pn_interface)
     m_box->Pack(m_hide_image_button);
     m_box->Pack(m_zoom_image_button);
     m_box->Pack(m_reload_image_button);
+    m_box->Pack(m_upload_image_button);
 
     m_window = sfg::Window::Create();
     m_window->SetStyle(~sfg::Window::Style::RESIZE & ~sfg::Window::Style::CLOSE & sfg::Window::Style::TOPLEVEL & ~sfg::Window::Style::TITLEBAR);
@@ -61,6 +66,28 @@ void BCCH_app::init_widgets (pubnub_interface &pn_interface)
 
     m_desktop.Add(m_window);
     m_desktop.SetProperty(".textSet", "FontSize", FONT_SIZE);
+}
+
+void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
+{
+    while (render_window.pollEvent(event)) {
+        m_desktop.HandleEvent(event);
+        if (event.type == sf::Event::Closed) {
+            render_window.close();
+        }
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == FOOTPEDAL_LEFT) {
+                std::cout << "footpedal left pressed" << std::endl;
+                m_pn_interface.show_image();
+            } else if (event.key.code == FOOTPEDAL_MIDDLE) {
+                std::cout << "footpedal middle pressed" << std::endl;
+                m_pn_interface.zoom_image();
+            } else if (event.key.code == FOOTPEDAL_RIGHT) {
+                std::cout << "footpedal right pressed" << std::endl;
+                m_pn_interface.reload_image();
+            }
+        }
+    }
 }
 
 void BCCH_app::Run ()
@@ -74,17 +101,12 @@ void BCCH_app::Run ()
     sf::Clock clock;
 
     while (render_window.isOpen()) {
-        while (render_window.pollEvent(event)) {
-            m_desktop.HandleEvent(event);
-            if (event.type == sf::Event::Closed) {
-                render_window.close();
-            }
+        handle_events(render_window, event);
 
-            m_desktop.Update(clock.restart().asSeconds());
+        m_desktop.Update(clock.restart().asSeconds());
 
-            render_window.clear();
-            m_sfgui.Display(render_window);
-            render_window.display();
-        }
+        render_window.clear();
+        m_sfgui.Display(render_window);
+        render_window.display();
     }
 }
