@@ -5,31 +5,26 @@
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/pubnub_interface.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/BCCH_app.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/formatting_helper.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/BCCH_main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/messenger.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test_main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/formatting_helper.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/pub_sub_helper.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_adns_sockets.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_sockets.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_resolv_and_connect_sockets.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_adns_sockets.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/widget_manager.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_ccore.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_coreapi.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_timer_list.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_timers.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_netcore.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_ccore.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_coreapi.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_timers.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_timer_list.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_coreapi_ex.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_generate_uuid.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_helper.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_alloc_std.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_coreapi_ex.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_generate_uuid.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_coreapi.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_helper.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_json_parse.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_ntf_sync.h" isTestSource="false" />
@@ -40,6 +35,12 @@
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_timer_list.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_assert_std.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/core/pubnub_netcore.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/base64/pbbase64.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_adns_sockets.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_resolv_and_connect_sockets.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_adns_sockets.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/libs/c-core/lib/sockets/pbpal_sockets.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/cpp/pubnub_futres_posix.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/cpp/pubnub_futres_sync.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/libs/c-core/posix/monotonic_clock_get_time_posix.c" isTestSource="false" />

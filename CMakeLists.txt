@@ -28,7 +28,8 @@ set(BCCH_SOURCE_FILES
         src/formatting_helper.cpp
         src/pub_sub_helper.cpp
         src/BCCH_app.cpp
-        src/pubnub_interface.cpp)
+        src/pubnub_interface.cpp
+        src/widget_manager.cpp)
 
 
 set(PUBNUB_FILES
