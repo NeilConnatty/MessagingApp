@@ -4,10 +4,6 @@
 
 #include "widget_manager.h"
 
-widget_manager::widget_manager () : widgets(5)
-{
-}
-
 void widget_manager::send_message ()
 {
     m_pn_interface.send_message(m_message_entry->GetText());

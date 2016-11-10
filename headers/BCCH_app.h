@@ -2,6 +2,7 @@
 // Created by Neil Connatty on 2016-11-04.
 //
 
+#include <SFML/Graphics.hpp>
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
 #include "pubnub_interface.h"

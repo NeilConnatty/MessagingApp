@@ -3,9 +3,7 @@
 //
 
 #include "BCCH_app.h"
-#include <SFML/Graphics.hpp>
 #include <widget_manager.h>
-
 
 void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
 {

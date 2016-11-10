@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/pubnub_interface.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/BCCH_app.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/widget_manager.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/BCCH_main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/messenger.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test_main.cpp" isTestSource="false" />

@@ -13,7 +13,6 @@
 class widget_manager
 {
 public:
-    widget_manager ();
     void init_widgets (sfg::Desktop &desktop, int screen_width, int screen_height);
 
 private:
