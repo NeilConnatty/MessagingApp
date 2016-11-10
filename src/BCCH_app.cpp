@@ -7,8 +7,8 @@
 
 void BCCH_app::send_message ()
 {
-    m_pn_interface.send_message(m_entry->GetText());
-    m_entry->SetText("");
+    m_pn_interface.send_message(m_message_entry->GetText());
+    m_message_entry->SetText("");
 }
 
 sfg::Button::Ptr BCCH_app::init_button (std::string name, std::function<void()> delegate)
@@ -21,42 +21,68 @@ sfg::Button::Ptr BCCH_app::init_button (std::string name, std::function<void()> 
 
 void BCCH_app::init_widgets (pubnub_interface &pn_interface)
 {
-    m_label = sfg::Label::Create("Input Message: ");
-    m_label->SetClass("textSet");
+    sfg::Box::Ptr box;
+    sfg::Box::Ptr box_1;
+    sfg::Frame::Ptr frame;
 
-    m_entry = sfg::Entry::Create();
-    m_entry->SetClass("textSet");
-    m_entry->SetRequisition(sf::Vector2f(800.0f, 0.0f));
+    auto label = sfg::Label::Create("Input Message: ");
+    label->SetClass("textSet");
 
-    auto box = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL, 5.0f);
-    box->Pack(m_label);
-    box->Pack(m_entry);
+    m_message_entry = sfg::Entry::Create();
+    m_message_entry->SetClass("textSet");
+    m_message_entry->SetRequisition(sf::Vector2f(850.0f, 0.0f));
 
-    buttons.push_back(init_button("Send Message", std::bind(&BCCH_app::send_message, this)));
-    buttons.push_back(init_button("Show Image", std::bind(&pubnub_interface::show_image, &pn_interface)));
-    buttons.push_back(init_button("Hide Image", std::bind(&pubnub_interface::hide_image, &pn_interface)));
-    buttons.push_back(init_button("Zoom Image", std::bind(&pubnub_interface::zoom_image, &pn_interface)));
-    buttons.push_back(init_button("Reload Image", std::bind(&pubnub_interface::reload_image, &pn_interface)));
-    buttons.push_back(init_button("Upload Image", std::bind(&pubnub_interface::upload_image, &pn_interface)));
-    buttons.push_back(init_button("Scroll Left", std::bind(&pubnub_interface::scroll_left, &pn_interface)));
-    buttons.push_back(init_button("Scroll Right", std::bind(&pubnub_interface::scroll_right, &pn_interface)));
-    buttons.push_back(init_button("Flip View", std::bind(&pubnub_interface::flip_view, &pn_interface)));
+    box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
+    box_1 = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL, 5.0f);
+    box_1->Pack(label);
+    box_1->Pack(m_message_entry);
+    box->Pack(box_1);
+    box->Pack(init_button("Send Message", std::bind(&BCCH_app::send_message, this)));
 
-    m_box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
-    m_box->Pack(box);
-    for (int i=0; i<buttons.size(); i++) {
-        m_box->Pack(buttons[i]);
+    frame = sfg::Frame::Create("Messages");
+    frame->SetClass("frame");
+    frame->Add(box);
+    widgets.push_back(frame);
+
+    frame = sfg::Frame::Create("Control Images");
+    frame->SetClass("frame");
+    box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
+    box->Pack(init_button("Show Image", std::bind(&pubnub_interface::show_image, &pn_interface)));
+    box->Pack(init_button("Hide Image", std::bind(&pubnub_interface::hide_image, &pn_interface)));
+    box->Pack(init_button("Zoom Image", std::bind(&pubnub_interface::zoom_image, &pn_interface)));
+    box->Pack(init_button("Reload Image", std::bind(&pubnub_interface::reload_image, &pn_interface)));
+    box_1 = sfg::Box::Create(sfg::Box::Orientation::HORIZONTAL, 5.0f);
+    box_1->Pack(init_button("Scroll Left", std::bind(&pubnub_interface::scroll_left, &pn_interface)));
+    box_1->Pack(init_button("Scroll Right", std::bind(&pubnub_interface::scroll_right, &pn_interface)));
+    box->Pack(box_1);
+    frame->Add(box);
+    widgets.push_back(frame);
+
+    frame = sfg::Frame::Create("Take Image");
+    frame->SetClass("frame");
+    frame->Add(init_button("Take and Upload Image", std::bind(&pubnub_interface::upload_image, &pn_interface)));
+    widgets.push_back(frame);
+
+    frame = sfg::Frame::Create("Control View");
+    frame->SetClass("frame");
+    frame->Add(init_button("Flip View", std::bind(&pubnub_interface::flip_view, &pn_interface)));
+    widgets.push_back(frame);
+
+    box = sfg::Box::Create(sfg::Box::Orientation::VERTICAL, 5.0f);
+    for (int i=0; i<widgets.size(); i++) {
+        box->PackEnd(widgets[i]);
     }
 
-    m_window = sfg::Window::Create();
-    m_window->SetStyle(~sfg::Window::Style::RESIZE & ~sfg::Window::Style::CLOSE & sfg::Window::Style::TOPLEVEL & ~sfg::Window::Style::TITLEBAR);
-    m_window->SetTitle("BCCH SmartGlasses Controller App");
-    m_window->Add(m_box);
-    m_window->SetRequisition(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
-    m_window->SetClass("textSet");
+    auto window = sfg::Window::Create();
+    window->SetStyle(~sfg::Window::Style::RESIZE & ~sfg::Window::Style::CLOSE & sfg::Window::Style::TOPLEVEL & ~sfg::Window::Style::TITLEBAR);
+    window->SetTitle("BCCH SmartGlasses Controller App");
+    window->Add(box);
+    window->SetRequisition(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+    window->SetClass("textSet");
 
-    m_desktop.Add(m_window);
+    m_desktop.Add(window);
     m_desktop.SetProperty(".textSet", "FontSize", FONT_SIZE);
+    m_desktop.SetProperty(".frame", "FontSize", FRAME_FONT_SIZE);
 }
 
 void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
@@ -90,7 +116,7 @@ void BCCH_app::render_screen (sf::RenderWindow &render_window)
 
 void BCCH_app::Run ()
 {
-    sf::RenderWindow render_window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BCCH SmartGlasses Controller App", sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow render_window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "BCCH SmartGlasses Controller", sf::Style::Titlebar | sf::Style::Close);
     render_window.resetGLStates();
     render_window.setFramerateLimit(60);
 

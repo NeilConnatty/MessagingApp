@@ -29,17 +29,13 @@ private:
     const unsigned int SCREEN_WIDTH = 1280;
     const unsigned int SCREEN_HEIGHT = 1280;
     const unsigned int FONT_SIZE = 40;
+    const unsigned int FRAME_FONT_SIZE = 30;
 
     sfg::SFGUI m_sfgui;
     sfg::Desktop m_desktop;
     pubnub_interface m_pn_interface;
-
-    sfg::Box::Ptr m_box;
-    sfg::Window::Ptr m_window;
-
-    sfg::Label::Ptr m_label;
-    sfg::Entry::Ptr m_entry;
-    std::vector<sfg::Button::Ptr> buttons;
+    sfg::Entry::Ptr m_message_entry;
+    std::vector<sfg::Widget::Ptr> widgets;
 };
 
 
