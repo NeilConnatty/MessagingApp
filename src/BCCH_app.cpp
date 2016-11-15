@@ -41,7 +41,7 @@ void BCCH_app::Run ()
     render_window.setFramerateLimit(60);
 
     widget_manager w_manager;
-    w_manager.init_widgets(m_desktop, SCREEN_WIDTH, SCREEN_HEIGHT);
+    w_manager.init_window(m_desktop, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     sf::Event event;
     sf::Clock clock;

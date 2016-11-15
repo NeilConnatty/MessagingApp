@@ -33,12 +33,8 @@ sfg::Box::Ptr widget_manager::create_vertical_box ()
     return create_box(sfg::Box::Orientation::VERTICAL);
 }
 
-void widget_manager::init_widgets (sfg::Desktop &desktop, int screen_width, int screen_height)
+void widget_manager::init_messages_frame ()
 {
-    sfg::Box::Ptr box;
-    sfg::Box::Ptr box_1;
-    sfg::Frame::Ptr frame;
-
     auto label = sfg::Label::Create("Input Message: ");
     label->SetClass("textSet");
 
@@ -46,59 +42,90 @@ void widget_manager::init_widgets (sfg::Desktop &desktop, int screen_width, int 
     m_message_entry->SetClass("textSet");
     m_message_entry->SetRequisition(sf::Vector2f(850.0f, 0.0f));
 
-    box = create_vertical_box();
-    box_1 = create_horizontal_box();
+    auto box = create_vertical_box();
+    auto box_1 = create_horizontal_box();
     box_1->Pack(label);
     box_1->Pack(m_message_entry);
     box->Pack(box_1);
     box->Pack(init_button("Send Message", std::bind(&widget_manager::send_message, this)));
 
-    frame = sfg::Frame::Create("Messages");
+    auto frame = sfg::Frame::Create("Messages");
     frame->SetClass("frame");
     frame->Add(box);
     widgets.push_back(frame);
+}
 
-    frame = sfg::Frame::Create("Control Images");
-    frame->SetClass("frame");
-    box = create_vertical_box();
+void widget_manager::init_images_frame ()
+{
+    auto box = create_vertical_box();
     box->Pack(init_button("Show Image", std::bind(&pubnub_interface::show_image, &m_pn_interface)));
     box->Pack(init_button("Hide Image", std::bind(&pubnub_interface::hide_image, &m_pn_interface)));
     box->Pack(init_button("Zoom Image", std::bind(&pubnub_interface::zoom_image, &m_pn_interface)));
     box->Pack(init_button("Reload Image", std::bind(&pubnub_interface::reload_image, &m_pn_interface)));
-    box_1 = create_horizontal_box();
+
+    auto box_1 = create_horizontal_box();
     box_1->Pack(init_button("Scroll Left", std::bind(&pubnub_interface::scroll_left, &m_pn_interface)));
     box_1->Pack(init_button("Scroll Right", std::bind(&pubnub_interface::scroll_right, &m_pn_interface)));
     box->Pack(box_1);
+
+    auto frame = sfg::Frame::Create("Control Images");
+    frame->SetClass("frame");
     frame->Add(box);
     widgets.push_back(frame);
+}
 
-    frame = sfg::Frame::Create("Take Image");
-    frame->SetClass("frame");
-    box = create_vertical_box();
+void widget_manager::init_take_photo_frame ()
+{
+    auto box = create_vertical_box();
     box->Pack(init_button("Take and Upload Image", std::bind(&pubnub_interface::upload_image, &m_pn_interface)));
-    label = sfg::Label::Create("(only works when video streaming off)");
+    auto label = sfg::Label::Create("(only works when video streaming off)");
     label->SetClass("frame");
     box->Pack(label);
+
+    auto frame = sfg::Frame::Create("Take Image");
+    frame->SetClass("frame");
     frame->Add(box);
     widgets.push_back(frame);
+}
 
-    frame = sfg::Frame::Create("Control View");
+void widget_manager::init_view_frame ()
+{
+    auto frame = sfg::Frame::Create("Control View");
     frame->SetClass("frame");
     frame->Add(init_button("Flip View", std::bind(&pubnub_interface::flip_view, &m_pn_interface)));
     widgets.push_back(frame);
+}
 
-    box = create_vertical_box();
-    for (int i=0; i<widgets.size(); i++) {
-        box->PackEnd(widgets[i]);
-    }
-
-    auto window = sfg::Window::Create();
+sfg::Window::Ptr widget_manager::create_window (sfg::Box::Ptr content, int screen_width, int screen_height)
+{
+    sfg::Window::Ptr window = sfg::Window::Create();
     window->SetStyle(~sfg::Window::Style::RESIZE & ~sfg::Window::Style::CLOSE & sfg::Window::Style::TOPLEVEL & ~sfg::Window::Style::TITLEBAR);
     window->SetTitle("BCCH SmartGlasses Controller App");
-    window->Add(box);
+    window->Add(content);
     window->SetRequisition(sf::Vector2f(screen_width, screen_height));
     window->SetClass("textSet");
 
+    return window;
+}
+
+void widget_manager::init_widgets ()
+{
+    init_messages_frame();
+    init_images_frame();
+    init_take_photo_frame();
+    init_view_frame();
+}
+
+void widget_manager::init_window (sfg::Desktop &desktop, int screen_width, int screen_height)
+{
+    init_widgets();
+
+    auto content = create_vertical_box();
+    for (int i=0; i<widgets.size(); i++) {
+        content->PackEnd(widgets[i]);
+    }
+
+    auto window = create_window(content, screen_width, screen_height);
     desktop.Add(window);
     desktop.SetProperty(".textSet", "FontSize", FONT_SIZE);
     desktop.SetProperty(".frame", "FontSize", FRAME_FONT_SIZE);

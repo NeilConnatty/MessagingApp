@@ -13,14 +13,20 @@
 class widget_manager
 {
 public:
-    void init_widgets (sfg::Desktop &desktop, int screen_width, int screen_height);
+    void init_window (sfg::Desktop &desktop, int screen_width, int screen_height);
 
 private:
+    void send_message ();
     sfg::Button::Ptr init_button (std::string name, std::function<void()> delegate);
     sfg::Box::Ptr create_box (sfg::Box::Orientation orientation);
     sfg::Box::Ptr create_vertical_box ();
     sfg::Box::Ptr create_horizontal_box ();
-    void send_message ();
+    void init_messages_frame ();
+    void init_images_frame ();
+    void init_take_photo_frame ();
+    void init_view_frame ();
+    void init_widgets ();
+    sfg::Window::Ptr create_window (sfg::Box::Ptr content, int screen_width, int screen_height);
 
 private:
     const unsigned int FONT_SIZE = 40;
