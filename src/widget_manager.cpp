@@ -74,7 +74,12 @@ void widget_manager::init_widgets (sfg::Desktop &desktop, int screen_width, int 
 
     frame = sfg::Frame::Create("Take Image");
     frame->SetClass("frame");
-    frame->Add(init_button("Take and Upload Image", std::bind(&pubnub_interface::upload_image, &m_pn_interface)));
+    box = create_vertical_box();
+    box->Pack(init_button("Take and Upload Image", std::bind(&pubnub_interface::upload_image, &m_pn_interface)));
+    label = sfg::Label::Create("(only works when video streaming off)");
+    label->SetClass("frame");
+    box->Pack(label);
+    frame->Add(box);
     widgets.push_back(frame);
 
     frame = sfg::Frame::Create("Control View");
