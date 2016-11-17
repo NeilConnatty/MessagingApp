@@ -17,6 +17,7 @@
 class BCCH_app
 {
 public:
+    BCCH_app ();
     void Run ();
 
 private:
@@ -30,6 +31,8 @@ private:
     sfg::SFGUI m_sfgui;
     sfg::Desktop m_desktop;
     pubnub_interface m_pn_interface;
+
+    bool l_pedal_pressed;
 };
 
 

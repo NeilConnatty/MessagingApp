@@ -5,6 +5,11 @@
 #include "BCCH_app.h"
 #include <widget_manager.h>
 
+BCCH_app::BCCH_app() :
+    l_pedal_pressed(false)
+{
+}
+
 void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
 {
     while (render_window.pollEvent(event)) {
@@ -12,16 +17,26 @@ void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
         if (event.type == sf::Event::Closed) {
             render_window.close();
         }
-        if (event.type == sf::Event::KeyPressed) {
+        // Handle footpedal presses
+        if (event.type == sf::Event::KeyPressed)
+        {
             if (event.key.code == FOOTPEDAL_LEFT) {
                 std::cout << "footpedal left pressed" << std::endl;
-                m_pn_interface.show_image();
+                l_pedal_pressed = !l_pedal_pressed;
             } else if (event.key.code == FOOTPEDAL_MIDDLE) {
                 std::cout << "footpedal middle pressed" << std::endl;
-                m_pn_interface.zoom_image();
+                if (l_pedal_pressed) {
+                    m_pn_interface.scroll_left();
+                } else {
+                    m_pn_interface.zoom_image();
+                }
             } else if (event.key.code == FOOTPEDAL_RIGHT) {
                 std::cout << "footpedal right pressed" << std::endl;
-                m_pn_interface.reload_image();
+                if (l_pedal_pressed) {
+                    m_pn_interface.scroll_right();
+                } else {
+                    m_pn_interface.hide_or_show_image();
+                }
             }
         }
     }

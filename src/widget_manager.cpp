@@ -52,6 +52,7 @@ void widget_manager::init_messages_frame ()
     auto frame = sfg::Frame::Create("Messages");
     frame->SetClass("frame");
     frame->Add(box);
+
     widgets.push_back(frame);
 }
 
@@ -71,6 +72,7 @@ void widget_manager::init_images_frame ()
     auto frame = sfg::Frame::Create("Control Images");
     frame->SetClass("frame");
     frame->Add(box);
+
     widgets.push_back(frame);
 }
 
@@ -85,6 +87,7 @@ void widget_manager::init_take_photo_frame ()
     auto frame = sfg::Frame::Create("Take Image");
     frame->SetClass("frame");
     frame->Add(box);
+
     widgets.push_back(frame);
 }
 
@@ -93,6 +96,7 @@ void widget_manager::init_view_frame ()
     auto frame = sfg::Frame::Create("Control View");
     frame->SetClass("frame");
     frame->Add(init_button("Flip View", std::bind(&pubnub_interface::flip_view, &m_pn_interface)));
+
     widgets.push_back(frame);
 }
 

@@ -30,6 +30,7 @@ public:
     void scroll_left ();
     void scroll_right ();
     void flip_view ();
+    void hide_or_show_image ();
 
 private:
     static void on_publish (pubnub::context &pn, pubnub_res res);
