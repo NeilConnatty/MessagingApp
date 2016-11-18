@@ -23,6 +23,7 @@ void BCCH_app::handle_events (sf::RenderWindow &render_window, sf::Event &event)
             if (event.key.code == FOOTPEDAL_LEFT) {
                 std::cout << "footpedal left pressed" << std::endl;
                 l_pedal_pressed = !l_pedal_pressed;
+                m_pn_interface.toggle_function();
             } else if (event.key.code == FOOTPEDAL_MIDDLE) {
                 std::cout << "footpedal middle pressed" << std::endl;
                 if (l_pedal_pressed) {

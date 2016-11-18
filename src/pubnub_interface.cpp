@@ -86,3 +86,9 @@ void pubnub_interface::hide_or_show_image ()
     std::cout << "hide_or_show_image()" << std::endl;
     publish_input("hide or show image");
 }
+
+void pubnub_interface::toggle_function ()
+{
+    std::cout << "toggle_function()" <<std::endl;
+    publish_input("toggle function");
+}
