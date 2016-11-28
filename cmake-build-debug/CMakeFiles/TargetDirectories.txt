@@ -1,0 +1,7 @@
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/BCCH.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/Nitty.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/pubnub_sync_posix.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/Test.dir
+/Users/neilconnatty/ClionProjects/Florie/cmake-build-debug/CMakeFiles/pubnub_callback_posix.dir
