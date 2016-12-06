@@ -80,7 +80,7 @@ void widget_manager::init_take_photo_frame ()
 {
     auto box = create_vertical_box();
     box->Pack(init_button("Take and Upload Image", std::bind(&pubnub_interface::upload_image, &m_pn_interface)));
-    auto label = sfg::Label::Create("(only works when video streaming off)");
+    auto label = sfg::Label::Create("(after taking image, streaming needs to be restarted)");
     label->SetClass("frame");
     box->Pack(label);
 
